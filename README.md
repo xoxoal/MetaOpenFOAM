@@ -97,7 +97,7 @@ MetaOpenFOAM: an LLM-based multi-agent framework for CFD
 
 Now your environment is set up and you can start working with MetaOpenFOAM.
 
-
+The code and inputs of MetaOpenFOAM 2.0 is going to upload as soon as possible (deadline: 2025.3.1)
 ## Citation
 If you find our work useful in your research, please consider citing:
 
@@ -108,4 +108,11 @@ If you find our work useful in your research, please consider citing:
   journal={Journal Name},
   year={2024},
   doi={http://arxiv.org/abs/2407.21320}
+}
+@article{Chen2025MetaOpenFOAM2.0,
+  title={MetaOpenFOAM 2.0: Large Language Model Driven Chain of Thought for Automating CFD Simulation and Post-Processing},
+  author={Yuxuan Chen and Xu Zhu and Hua Zhou and Zhuyin Ren},
+  journal={Journal Name},
+  year={2025},
+  doi={http://arxiv.org/abs/2502.00498}
 }
