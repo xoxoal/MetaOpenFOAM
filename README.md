@@ -161,8 +161,10 @@ If you find our work useful in your research, please consider citing:
   doi={http://arxiv.org/abs/2502.00498}
 }
 
-## Contributing & Support
-
-Feel free to open Issues or submit Pull Requests!  
----  
-© 2025 MetaOpenFOAM Project Maintainers  
+@article{Chen2025OptMetaOpenFOAM,
+  title={OptMetaOpenFOAM: Large Language Model Driven Chain of Thought for Sensitivity Analysis and Parameter Optimization based on CFD},
+  author={Yuxuan Chen and Long Zhang and Xu Zhu and Hua Zhou and Zhuyin Ren},
+  journal={Journal Name},
+  year={2025},
+  doi={http://arxiv.org/abs/2503.01273}
+}
