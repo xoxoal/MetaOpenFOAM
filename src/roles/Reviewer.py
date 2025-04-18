@@ -23,12 +23,14 @@ class Reviewer(Role):
         todo = self.rc.todo  # todo will be SimpleWriteCode()
         
         context_all = self.get_memories()
+        print('context_all:',context_all)
+        # print('cfd_task_review:',context_all[-2])
+        # context = [context_all[-2],context_all[-1]]
 
-        context = [context_all[0],context_all[-1]]
+        subtasks = await todo.run(context_all)
 
-        subtasks = await todo.run(context)
-
-
+        print('review_subtasks', subtasks)
+        
         for i in subtasks:
            
            self.rc.env.publish_message(Message(content=i, cause_by=ReviewerAction))

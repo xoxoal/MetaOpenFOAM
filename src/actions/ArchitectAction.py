@@ -10,7 +10,7 @@ from metagpt.logs import logger
 from qa_module import AsyncQA_tutorial_name
 import config_path
 from Statistics import global_statistics
-
+import sys
 class ArchitectAction(Action):
 
     PROMPT_TEMPLATE_divide_task: str = """
@@ -37,8 +37,8 @@ class ArchitectAction(Action):
     Your task is to generate the openfoam input foamfiles list following file structure of OpenFOAM cases to meet the user requirements.
     You should splits foamfiles list into several subtasks, and one subtask corresponds to one input foamfile
     Return ```splits into number_of_subtasks subtasks:  
-    subtask1: to Write a OpenFoam specific_file_name foamfile in specific_folder_name folder that could be used to meet user requirement:{requirement}.
-    subtask2: to Write a OpenFoam specific_file_name foamfile in specific_folder_name folder that could be used to meet user requirement:{requirement}.
+    subtask1: to Write a OpenFoam specific_file_name foamfile in specific_folder_name folder that could be used to meet user requirement:{requirement}
+    subtask2: to Write a OpenFoam specific_file_name foamfile in specific_folder_name folder that could be used to meet user requirement:{requirement}
     ...
 
     ``` with NO other texts,
@@ -85,33 +85,38 @@ class ArchitectAction(Action):
 
         async_qa_tutotial = AsyncQA_tutorial_name()
 
-        prompt_Translate = self.PROMPT_Translate.format(requirement=with_messages[0].content)
-        rsp = await async_qa_tutotial.ask(prompt_Translate)
-        user_case = rsp["result"]
-        print('user_case:',user_case)
-        case_name = self.parse_case_name(user_case)
-        if config_path.run_times > 1:
-            config_path.Case_PATH = f"{config_path.Run_PATH}/{case_name}_{global_statistics.runtimes}"
+        print('CFD task:',with_messages.content)
+        # prompt_Translate = self.PROMPT_Translate.format(requirement=with_messages.content)
+        # rsp = await async_qa_tutotial.ask(prompt_Translate)
+        # user_case = rsp["result"]
+        # print('user_case:',user_case)
+        # #case_name = self.parse_case_name(user_case)
+        # # if config_path.run_times > 1:
+        # #     config_path.Case_PATH = f"{config_path.Run_PATH}/{case_name}_{global_statistics.runtimes}"
+        # # else:
+        # #     config_path.Case_PATH = f"{config_path.Run_PATH}/{case_name}"
+        # # os.makedirs(config_path.Case_PATH, exist_ok=True)
+
+        # prompt_Find = self.PROMPT_Find.format(user_case=user_case)
+        # rsp = await async_qa_tutotial.ask(prompt_Find)
+        # doc = rsp["source_documents"]
+        # tutorial = doc[0]
+        # print('find_case',tutorial)
+        # save_path = config_path.Case_PATHs[i]
+
+        #self.save_find_tutorial(tutorial.page_content, save_path)
+        if config_path.tasks>=3:
+            tutorial = self.read_tutorial(config_path.Para_PATH)
         else:
-            config_path.Case_PATH = f"{config_path.Run_PATH}/{case_name}"
-        os.makedirs(config_path.Case_PATH, exist_ok=True)
-
-        prompt_Find = self.PROMPT_Find.format(user_case=user_case)
-        rsp = await async_qa_tutotial.ask(prompt_Find)
-        doc = rsp["source_documents"]
-        tutorial = doc[0]
-        print('find_case',tutorial)
-        save_path = config_path.Case_PATH
-
-        self.save_find_tutorial(tutorial.page_content, save_path)
-
-        prompt_subtask = self.PROMPT_TEMPLATE_divide_task.format(requirement=with_messages[0].content, tutorial=tutorial)
+            tutorial = self.read_tutorial(config_path.Case_PATH)
+            
+        prompt_subtask = self.PROMPT_TEMPLATE_divide_task.format(requirement=with_messages.content, tutorial=tutorial)
         rsp = await async_qa_tutotial.ask(prompt_subtask)
         result = rsp["result"]
         logger.info(str(result))
 
         subtasks: List[str] = self.split_subtask(result)
-        
+
         return subtasks
     
     def split_subtask(self, content: str) -> list:
@@ -142,10 +147,11 @@ class ArchitectAction(Action):
         match = re.search(r'case name:\s*(.+)', rsp)
         your_task_folder = match.group(1).strip() if match else 'None'
         return your_task_folder
-    def save_find_tutorial(self, tutorial, save_path):
-        file_path = f"{save_path}/find_tutorial.txt"
-        with open(file_path, 'w') as file:
-            file.write(tutorial) 
 
-        print(f"File saved successfully at {file_path}")
-        return 0
+
+    def read_tutorial(self, read_path):
+        file_path = f"{read_path}/find_tutorial.txt"
+        with open(file_path, 'r', encoding='utf-8') as file:
+            tutorial = file.read()
+
+        return tutorial

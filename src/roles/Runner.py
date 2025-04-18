@@ -20,6 +20,7 @@ class Runner(Role):
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
         todo = self.rc.todo  # todo will be SimpleWriteCode()
         context = self.get_memories()
+        print('context_all1:',context)
         msg = await todo.run(context)
         msg = Message(content=msg, role=self.profile, cause_by=type(todo))
         return msg

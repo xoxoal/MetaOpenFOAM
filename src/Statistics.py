@@ -3,6 +3,9 @@ import os
 class Statistics:
     def __init__(self):
         self.loop = 0
+        self.Run_loop = 0
+        self.Postprocess_loop = 0
+        self.Postprocess_python_loop = 0
         self.runtimes = 0
         self.Executability = 0
         self.total_tokens = 0
@@ -18,6 +21,9 @@ class Statistics:
 
     def save(self, other):
         self.loop += other.loop
+        self.Run_loop += other.Run_loop
+        self.Postprocess_loop += other.Postprocess_loop
+        self.Postprocess_python_loop += other.Postprocess_python_loop
         self.Executability += other.Executability
         self.total_tokens += other.total_tokens
         self.prompt_tokens += other.prompt_tokens
@@ -29,6 +35,9 @@ class Statistics:
 
     def average(self, count):
         self.loop /= count
+        self.Run_loop /= count
+        self.Postprocess_loop /= count
+        self.Postprocess_python_loop /= count
         self.Executability /= count
         self.total_tokens /= count
         self.prompt_tokens /= count
@@ -40,6 +49,9 @@ class Statistics:
 
     def display(self):
         print(f"Average Loop: {self.loop}")
+        print(f"Average Run_loop: {self.Run_loop}")
+        print(f"Average Postprocess_loop: {self.Postprocess_loop}")
+        print(f"Average Postprocess_python_loop: {self.Postprocess_python_loop}")
         print(f"Average Executability: {self.Executability}")
         print(f"Average Total Tokens: {self.total_tokens}")
         print(f"Average Prompt Tokens: {self.prompt_tokens}")
@@ -54,6 +66,9 @@ class Statistics:
         file_path = os.path.join(directory, 'statistics.txt')
         with open(file_path, 'w') as f:
             f.write(f"Loop: {self.loop}\n")
+            f.write(f"Run_loop: {self.Run_loop}\n")
+            f.write(f"Postprocess_loop: {self.Postprocess_loop}\n")
+            f.write(f"Postprocess_python_loop: {self.Postprocess_python_loop}\n")
             f.write(f"Executability: {self.Executability}\n")
             f.write(f"Total Tokens: {self.total_tokens}\n")
             f.write(f"Prompt Tokens: {self.prompt_tokens}\n")
@@ -68,6 +83,9 @@ class Statistics:
         file_path = os.path.join(directory, 'ave_statistics.txt')
         with open(file_path, 'w') as f:
             f.write(f"Loop: {self.loop}\n")
+            f.write(f"Run_loop: {self.Run_loop}\n")
+            f.write(f"Postprocess_loop: {self.Postprocess_loop}\n")
+            f.write(f"Postprocess_python_loop: {self.Postprocess_python_loop}\n")
             f.write(f"Executability: {self.Executability}\n")
             f.write(f"Total Tokens: {self.total_tokens}\n")
             f.write(f"Prompt Tokens: {self.prompt_tokens}\n")

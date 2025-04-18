@@ -1,0 +1,26 @@
+usr_requirment: "do a RANS simulation of incompressible pitzDaily flow using pimpleFoam and plot the velocity of the outlet with spatial Y coordinate as the axes at latest time through post-processing" 
+max_loop: 10
+temperature: 0.01
+batchsize: 10
+searchdocs: 2
+run_times: 10
+
+MetaGPT_PATH: "MetaGPT/"
+OPENAI_API_KEY: "XXX"
+OPENAI_PROXY: "http://127.0.0.1:8118"
+OPENAI_BASE_URL: "https://api.openai-proxy.com/v1"
+model: "gpt-4o"
+
+#Examples of usr_requirments
+#do a DNS simulation of incompressible forcing homogeneous isotropic turbulence with Grid 16^3 using dnsFoam (success) loop 2
+#do a LES simulation (not parallel) of incompressible channel flow with Grid 50*10*10 using pimpleFoam, inlet velocity 1 m/s, length 5 cm, case name: incompressibleChannelFlow3 (success) loop 6
+#do a DNS simulation of incompressible forcing homogeneous isotropic turbulence with Grid 32^3 using dnsFoam (success)
+#do a RANS simulation of backward facing step with inlet velocity 1 m/s, without parallel (success) loop 12
+#do a simulation of flow around a cylinder with inlet velocity 1 m/s without parallel, case name: cylinder3
+#do a LES simulation (not parallel) of incompressible channel flow with Grid 50*10*10 using pimpleFoam, inlet velocity 1 m/s, length 5 cm and the blockMeshDict is already prepared.
+#do an incompressible lid driven cavity flow simulation with the top wall moves in the x direction at a speed of 1 m/s while the other 3 are stationary (no loop) (success)
+#do a LES simulation of compressible pitzDaily using rhoPimpleFoam, and the velocity of inlet is 100 m/s.
+#do a laminar simulation of incompressible planar Poiseuille flow of a non-Newtonian fluid with grid 1*20*1, modelled using the Maxwell viscoelastic laminar stress model, initially at rest, constant pressure gradient applied from time zero
+#do a compressible simulation of squareBendLiq of using rhoSimpleFoam with endTime 100 and writeInterval 10 (success)
+#do a RANS simulation of buoyantCavity using buoyantSimpleFoam, which investigate natural convection in a heat cavity with a temperature difference of 20K is maintained between the hot and cold; the remaining patches are treated as adiabatic (ex: 2)
+#, with `endTime` = 0.01, `deltaT` = 0.0001"

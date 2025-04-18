@@ -9,7 +9,7 @@ from metagpt.logs import logger
 from actions.InputWriterAction import InputWriterAction
 from actions.ArchitectAction import ArchitectAction
 from actions.ReviewerAction import ReviewerAction
-
+import sys
 class InputWriter(Role):
     name: str = "Yuxuan"
     profile: str = "InputWriter"
@@ -26,16 +26,22 @@ class InputWriter(Role):
         #print('self.rc.history3:',self.rc.history)
         number_subtasks = self.get_memories(k=1)[0]
         print('number_subtasks',number_subtasks)
+        print('self.rc.history_InputWriter:',self.rc.history)
 
-        context = self.get_memories(k=1+int(number_subtasks.content))
+        context = self.get_memories(k=1+int(number_subtasks.content)+1)
+
+        cfd_task = context[0]
+
+        print('cfd_task_InputWriter',cfd_task)
 
         if context: 
             context = context[:-1]
     
         print('get_memories_InputWriter',context)
+
         code_text = await todo.run(context)
 
-        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
+        msg = Message(content=cfd_task.content, role=self.profile, cause_by=type(todo))
         #msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
         return msg
     

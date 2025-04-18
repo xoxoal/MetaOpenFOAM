@@ -1,0 +1,11 @@
+name: metaopenfoam
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.4
+  - pip
+  - pip:
+      - -r requirements.txt     # 先装公共依赖
+      - -e ./MetaGPT            # 本地源码安装 MetaGPT
+      - -e ./active_subspaces   # 本地源码安装 active_subspaces

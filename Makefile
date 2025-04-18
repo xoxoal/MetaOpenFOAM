@@ -1,6 +1,7 @@
 # Define the Python interpreter
 PYTHON=python
-Case_input=Cavity
+Case_input=OptHIT_1var
+#PostPitzDaily_RANS_y
 
 # Define the paths to the Python scripts and input file
 SRC_DIR=src
@@ -12,8 +13,11 @@ LANGCHAIN_DB_ADD_SUMMARY=$(SRC_DIR)/Langchain_database_add_tutorial_summary.py
 LANGCHAIN_DB_ADD_TUTORIAL=$(SRC_DIR)/Langchain_database_add_tutorial.py
 LANGCHAIN_DB_ADD_COMMAND=$(SRC_DIR)/Langchain_database_add_command.py
 LANGCHAIN_DB_ADD_ALLRUN=$(SRC_DIR)/Langchain_database_add_allrun.py
-METAOPENFOAM_V2=$(SRC_DIR)/metaOpenfoam_v2.py
-TEST = $(SRC_DIR)/test.py
+# METAOPENFOAM_V2=$(SRC_DIR)/metaOpenfoam_v2.py
+# PARAMETAOPENFOAM=$(SRC_DIR)/ParaMetaOpenfoam.py
+# POSTMETAOPENFOAM=$(SRC_DIR)/PostMetaOpenfoam.py
+OPTMETAOPENFOAM=$(SRC_DIR)/OptMetaOpenfoam.py
+# TEST = $(SRC_DIR)/GPT_ask.py
 
 # Define the CONFIG_FILE_PATH environment variable
 CONFIG_FILE_PATH=$(INPUT_FILE)
@@ -22,7 +26,7 @@ CONFIG_FILE_PATH=$(INPUT_FILE)
 export CONFIG_FILE_PATH
 
 # Default target
-all: run_config run_postprocess run_db_add run_main
+all: run_config run_postprocess run_db_add run_optmain
 
 # Run config_path.py to load system paths with input file
 run_config:
@@ -48,8 +52,8 @@ run_db_add:
 # Run metaOpenfoam_v2.py to execute the main program
 run_main:
 	@echo "Running metaOpenfoam_v2.py to execute the main program..."
-	$(PYTHON) $(METAOPENFOAM_V2)
-
+	$(PYTHON) $(OPTMETAOPENFOAM)
+	
 # Clean up generated files (if needed)
 clean:
 	@echo "Cleaning up..."
