@@ -5,9 +5,9 @@
 - 中文版： [README_zh.md](README_zh.md)  
 - English:   [README_en.md](README_en.md)(default)
 
-# MetaOpenFOAM One‑Click Installation Guide
+# MetaOpenFOAM One‑Click Installation and User Guide
 
-> **Version**: 2025‑04‑18  
+> **Version**: v1.3.0
 > **Overview**: Set up the entire development environment, dependencies, and build MetaOpenFOAM with a single script.
 
 ---
