@@ -1,4 +1,4 @@
-# MetaOpenFOAM
+# MetaOpenFOAM: an LLM-based multi-agent framework for CFD
 
 请选择语言 / Choose your language:
 
