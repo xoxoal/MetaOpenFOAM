@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-# —— 可根据需要改名 ——  
 ENV_DIR=./metaopenfoam_env
 
-# —— 1. 创建或跳过环境 ——  
+# 1) 创建或跳过环境
 if [ ! -d "$ENV_DIR" ]; then
   echo "🔧 [Step 1] 创建 conda 环境到 ${ENV_DIR} ..."
   conda env create -p "$ENV_DIR" -f environment.yml
@@ -12,21 +11,31 @@ else
   echo "⚡ 环境目录已存在，跳过创建"
 fi
 
-# —— 2. 激活环境 ——  
-# 注意要先 source conda.sh，才能 activate 路径环境
+# 2) 激活环境
 source "$(conda info --base)/etc/profile.d/conda.sh"
-echo "🔑 激活环境：conda activate ${ENV_DIR}"
 conda activate "$ENV_DIR"
 
-# —— 3. 安装或更新依赖 ——  
-echo "📦 [Step 2] 安装公共依赖（requirements.txt）..."
+# 3) 拉取本地包源码
+if [ ! -d "MetaGPT" ]; then
+  echo "📥 [Step 2] 克隆 MetaGPT 源码 ..."
+  git clone --depth 1 https://github.com/geekan/MetaGPT.git
+else
+  echo "📥 MetaGPT 已存在，跳过"
+fi
+
+if [ ! -d "active_subspaces" ]; then
+  echo "📥 [Step 3] 克隆 active_subspaces 源码 ..."
+  git clone --depth 1 https://github.com/activematter/active_subspaces.git
+else
+  echo "📥 active_subspaces 已存在，跳过"
+fi
+
+# 4) 安装依赖
+echo "📦 [Step 4] 安装公共依赖..."
 pip install --upgrade -r requirements.txt
 
-echo "📦 [Step 3] 可编辑安装本地包 MetaGPT & active_subspaces..."
+echo "📦 [Step 5] 安装源码包..."
 pip install --upgrade -e ./MetaGPT
 pip install --upgrade -e ./active_subspaces
 
-
-echo "✅ 安装完成！"
-echo "   下次只需进入项目根目录，运行："
-echo "     conda activate $ENV_DIR"
+echo "✅ 安装完成！下次只需：conda activate $ENV_DIR"
