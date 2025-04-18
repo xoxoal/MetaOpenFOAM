@@ -104,7 +104,7 @@ model:           "deepseek-chat"
 # model:            "gpt-4o"
 ```
 
-> **Note**: Supports `openai` and `deepseek` models. Default uses HuggingFace Embedding; switch to OpenAI for the embedding method in the paper.
+> **Note**: The default implementation uses HuggingFace embeddings for retrieval-augmented generation (RAG), which have not been fully validated and may yield different retrieval performance compared to the OpenAI embeddings used in the original paper. If you want to reproduce the paper’s results more faithfully, switch to the OpenAI embedding for dataset.
 
 ### Edit Makefile
 
