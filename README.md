@@ -24,7 +24,7 @@
   - [First Run](#first-run)  
   - [Run Main Program](#run-main-program)  
 - [FAQ](#faq)  
-- [Contributing & Support](#contributing--support)
+- [Citation](#citation)
 
 ---
 
@@ -111,9 +111,6 @@ model:           "deepseek-chat"
 In the project root `Makefile`, adjust:
 
 ```makefile
-# Python interpreter (e.g. python3)
-PYTHON     = python
-
 # Input case name (matches filename in inputs/, without extension)
 Case_input = Buoyant_Cavity
 ```
