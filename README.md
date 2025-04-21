@@ -35,8 +35,8 @@
 3. Repository root contains:  
    - `environment.yml`  
    - `requirements.txt`  
-   - `MetaGPT/` (local source)  
-   - `active_subspaces/` (local source)  
+   - `MetaGPT/` (git source)  
+   - `active_subspaces/` (git source)  
    - `MetaOpenFOAM/` (MetaOpenFOAM source)  
    - `install_metaopenfoam.sh` (installation script)
 
