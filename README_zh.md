@@ -29,8 +29,8 @@
 3. 仓库根目录包含以下文件／目录：  
    - `environment.yml`  
    - `requirements.txt`  
-   - `MetaGPT/`（本地源码）  
-   - `active_subspaces/`（本地源码）  
+   - `MetaGPT/`（git源码）  
+   - `active_subspaces/`（git源码）  
    - `MetaOpenFOAM/`（MetaOpenFOAM 源码）  
    - `install_metaopenfoam.sh`（安装脚本）
 
