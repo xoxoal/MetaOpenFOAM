@@ -25,7 +25,7 @@ fi
 
 if [ ! -d "active_subspaces" ]; then
   echo "📥 [Step 3] 克隆 active_subspaces 源码 ..."
-  git clone --depth 1 https://github.com/activematter/active_subspaces.git
+  git clone --depth 1 https://github.com/paulcon/active_subspaces.git
 else
   echo "📥 active_subspaces 已存在，跳过"
 fi
